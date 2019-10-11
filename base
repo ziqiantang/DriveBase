@@ -60,8 +60,11 @@ public void runOpMode(){
     leftFront=hardwareMap.get(DcMotor.class,"left");
     right
     
-    right=hardwareMap.get(DcMotor.class,"right");
-    left=hardwareMap.get(DcMotor.class,"left");
+    rightBack=hardwareMap.get(DcMotor.class,"rightBack");
+    leftBack=hardwareMap.get(DcMotor.class,"leftBack");
+    rightFront=hardwareMap.get(DcMotor.class,"rightFront");
+    leftFront=hardwareMap.get(DcMotor.class,"leftFront");
+    
     arm=hardwareMap.get(DcMotor.class,"arm");
     arm1=hardwareMap.get(DcMotor.class,"arm1");
     leftHand=hardwareMap.get(CRServo.class,"leftHand");
@@ -76,10 +79,15 @@ public void runOpMode(){
     reset();
     
     while (opModeIsActive()) {
-    right.setDirection(DcMotor.Direction.REVERSE);
-    left.setDirection(DcMotor.Direction.FORWARD);
+    rightFront.setDirection(DcMotor.Direction.REVERSE);
+    leftFront.setDirection(DcMotor.Direction.FORWARD);
+    rightFront.setDirection(DcMotor.Direction.REVERSE);
+    leftFront.setDirection(DcMotor.Direction.FORWARD);
+    
     arm.setDirection(DcMotor.Direction.FORWARD);
     arm1.setDirection(DcMotor.Direction.FORWARD);
+   
+  
     Drive(); 
    
     }
@@ -101,22 +109,22 @@ public void reset(){
 }
 
 public void Drive() {
-   double you=0.0;
-   double mei=0.0;
-   double position=0.0;
+   
+double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
+double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
+double rightX = gamepad1.right_stick_x;
+final double v1 = r * Math.cos(robotAngle) + rightX;
+final double v2 = r * Math.sin(robotAngle) - rightX;
+final double v3 = r * Math.sin(robotAngle) + rightX;
+final double v4 = r * Math.cos(robotAngle) - rightX;
 
-        you=Math.pow(gamepad1.right_stick_y, 5.0);
-        mei=Math.pow(gamepad1.right_stick_x, 5.0);
-      
-
-       // double you=Math.pow(gamepad1.left_stick_y, 3.0);
-
-        right.setPower(you);
-        left.setPower(you);
-        
-        if(gamepad1.right_stick_x>=0.2||gamepad1.right_stick_x<=-0.2){
-        left.setPower(-mei);
-        right.setPower(mei);
+       
+  
+        rightFront.setPower(v2);
+        leftFront.setPower(v1);
+        rightBack.setPower(v4);
+        leftBack.setPower(v3}
+       
             
         }
         
