@@ -1,0 +1,2 @@
+right=hardwareMap.get(DcMotor.class,"right");
+    left=hardwareMap.get(DcMotor.class,"left");
