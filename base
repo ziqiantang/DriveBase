@@ -37,14 +37,15 @@ import android.graphics.Color;
 @Disabled
 public class SimplestTests extends LinearOpMode{
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor right;
-    private DcMotor leftHa;
-    private DcMotor arm;
-    private DcMotor arm1;
+    private DcMotor rightFront;
+    private DcMotor rightBack;
+    private DcMotor leftFront;
+    private DcMotor leftBack;
+    private DcMotor leftArm;
+    private DcMotor rightArm;
     private CRServo hook;
     private Servo leftHand;
     private Servo rightHand;
-    private Servo lid;
     static final double     ANDYMRK_TICKS_PER_REV = 1120;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 4 ;     // For figuring circumference
@@ -127,39 +128,22 @@ final double v4 = r * Math.cos(robotAngle) - rightX;
         leftBack.setPower(v3}
        
             
-        }
+    
         
-       
-      
 
-        
-    if(gamepad2.right_bumper)
-    hook.setPosition(1.0);
-    if(gamepad2.left_bumper)
-    hook.setPosition(0.0);
-    
-    
-    if(gamepad2.left_trigger!=0)  { 
-    leftHand.setPower(-1);
-    rightHand.setPower(1);
+    pusher.setPower(-Math.pow(gamepad2.left_stick_x, 1.0));
+
+  if(gamepad2.left_bumper)  { 
+    leftHand.setPosition(-1);
+    rightHand.setPosition(1);
     }
-        
-    if(gamepad2.right_trigger!=0){
-    leftHand.setPower(1);
-    rightHand.setPower(-1);
-    }
-    if(gamepad2.x){
-    leftHand.setPower(0);
-    rightHand.setPower(0);
+     if(gamepad2.right_bumper)  { 
+    leftHand.setPosition(1);
+    rightHand.setPosition(-1);
     }
     
-    if(gamepad2.left_stick_x>0)
-    lid.setPosition(1.0);
-    if(gamepad2.left_stick_x<0)
-    lid.setPosition(0.0);
     
-    arm.setPower(-Math.pow(gamepad2.right_stick_y, 1.0));
-    arm1.setPower(-Math.pow(gamepad2.right_stick_y, 1.0));
+    
 }
     
    
